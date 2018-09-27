@@ -9,33 +9,73 @@
 import UIKit
 import CoreMotion
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var prevSteps: UILabel!
     @IBOutlet weak var todaySteps: UILabel!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var tillGoal: UILabel!
+    @IBOutlet weak var goal1: UILabel! {
+        didSet {
+            goal1.text = "\(filler)"
+        }
+    }
+    @IBOutlet weak var goal2: UILabel! {
+        didSet {
+            goal2.text = "\(filler)"
+        }
+    }
+    @IBOutlet weak var currentActivity: UILabel!
+    
     let activityManager = CMMotionActivityManager()
     let customQueue = OperationQueue()
     let pedometer = CMPedometer()
     let startOfDay = NSCalendar.current.startOfDay(for: Date())
-   
+    let filler = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        all textfield methods dont work unless below is included for some reason
+        textField.delegate = self
+//        make keyboard numpad type
+        self.textField.keyboardType = UIKeyboardType.numberPad
+
+//        tracks type of motion
         if CMMotionActivityManager.isActivityAvailable(){
             self.activityManager.startActivityUpdates(to: customQueue)
             { (activity:CMMotionActivity?) -> Void in
-//                print("%@", activity!.description)
+                print("%@", activity!)
+                DispatchQueue.main.async {
+                    if (activity!.unknown) {
+                        self.currentActivity.text = "Activity: Unknown"
+                    }
+                    if (activity!.stationary) {
+                        self.currentActivity.text = "Activity: Stationary"
+                    }
+                    if (activity!.walking) {
+                        self.currentActivity.text = "Activity: Walking"
+                    }
+                    if (activity!.running) {
+                        self.currentActivity.text = "Activity: Running"
+                    }
+                    if (activity!.automotive) {
+                        self.currentActivity.text = "Activity: In Car"
+                    }
+                    if (activity!.cycling) {
+                        self.currentActivity.text = "Activity: Cycling"
+                    }
+                }
             }
             
         }
-        
+//        used for step counting
         if CMPedometer.isStepCountingAvailable(){
             //calculates number of steps real time
             pedometer.startUpdates(from: startOfDay, withHandler: {(data,error) in
                 if let pedData = data {
                     DispatchQueue.main.async {
                         self.todaySteps.text = "\(pedData.numberOfSteps)"
+                        self.tillGoal.text = "\(pedData.numberOfSteps)"
                     }
                 }
 
@@ -61,8 +101,10 @@ class ViewController: UIViewController {
             
             }
         }
+
         
     }
+    
 
     override func viewWillDisappear(_ animated: Bool) {
         if CMMotionActivityManager.isActivityAvailable() {
@@ -70,6 +112,13 @@ class ViewController: UIViewController {
         }
         super.viewWillDisappear(animated)
     }
+//    closes text field numpad when tapped outside of
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        goal1.text = textField.text
+        goal2.text = textField.text
+    }
+    
     
    
 

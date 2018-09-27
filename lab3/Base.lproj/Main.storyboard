@@ -38,8 +38,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBL-g7-51O">
-                                <rect key="frame" x="116.5" y="43" width="142" height="33.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="tBL-g7-51O">
+                                <rect key="frame" x="112.5" y="43" width="150" height="33.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6f-EK-IFQ">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="33.5"/>
@@ -48,13 +48,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idw-pI-LSm">
-                                        <rect key="frame" x="60" y="0.0" width="8.5" height="33.5"/>
+                                        <rect key="frame" x="64" y="0.0" width="8.5" height="33.5"/>
                                         <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSh-ef-Tzf">
-                                        <rect key="frame" x="68.5" y="0.0" width="73.5" height="33.5"/>
+                                        <rect key="frame" x="76.5" y="0.0" width="73.5" height="33.5"/>
                                         <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="30"/>
                                         <color key="textColor" red="1" green="0.17216202531795421" blue="0.1374463159404945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -103,6 +103,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVS-Qu-U1o">
+                                <rect key="frame" x="45" y="535" width="275" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.22627444631365001" green="0.31309058395706513" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -115,7 +122,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="currentActivity" destination="BVS-Qu-U1o" id="g3K-WR-9HF"/>
+                        <outlet property="goal1" destination="uSh-ef-Tzf" id="vSQ-LR-Cp3"/>
+                        <outlet property="goal2" destination="VKb-aW-cjN" id="D3Q-QH-L9Q"/>
                         <outlet property="prevSteps" destination="uFp-a6-Di5" id="or9-Bc-YxF"/>
+                        <outlet property="textField" destination="3FC-Ji-2Bw" id="iaC-99-LOF"/>
+                        <outlet property="tillGoal" destination="u6f-EK-IFQ" id="AKh-aQ-tQg"/>
                         <outlet property="todaySteps" destination="5Oh-c8-plX" id="OhO-4O-gI0"/>
                     </connections>
                 </viewController>
