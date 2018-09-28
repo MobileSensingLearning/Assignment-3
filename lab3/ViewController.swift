@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     @IBOutlet weak var currentActivity: UILabel!
+    @IBOutlet weak var gameStart: UIButton!
     
     let activityManager = CMMotionActivityManager()
     let customQueue = OperationQueue()
@@ -44,7 +45,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if CMMotionActivityManager.isActivityAvailable(){
             self.activityManager.startActivityUpdates(to: customQueue)
             { (activity:CMMotionActivity?) -> Void in
-                print("%@", activity!)
                 DispatchQueue.main.async {
                     if (activity!.unknown) {
                         self.currentActivity.text = "Activity: Unknown"
@@ -68,6 +68,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
+        
+//        load from user_defaults if possible
+        if(isKeyPresentInUserDefaults(key: "goal")) {
+            let temp = UserDefaults.standard.string(forKey: "goal")
+            if(temp! == "") {
+                goal1.text = "0"
+                goal2.text = "0"
+            }
+            else {
+                goal1.text = UserDefaults.standard.string(forKey: "goal")
+                goal2.text = UserDefaults.standard.string(forKey: "goal")
+            }
+
+        }
 //        used for step counting
         if CMPedometer.isStepCountingAvailable(){
             //calculates number of steps real time
@@ -86,10 +100,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //            self.pedometer.stopUpdates()
 //        }
         
-        let now = NSDate()
-        let from = now.addingTimeInterval(-60*60*24)
-        
-        self.pedometer.queryPedometerData(from: from as Date, to: now as Date)
+
+        let from = startOfDay.addingTimeInterval(-60*60*24)
+        self.pedometer.queryPedometerData(from: from, to: startOfDay)
         {(pedData: CMPedometerData?, error: Error?) -> Void in
             if let unwrappedPedData = pedData{
                 let aggr_string = """
@@ -115,8 +128,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //    closes text field numpad when tapped outside of
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        goal1.text = textField.text
-        goal2.text = textField.text
+        //can swap end editing with textfield resign first responder
+        if(textField.text != "") {
+            goal1.text = textField.text
+            goal2.text = textField.text
+        }
+
+//        check if today's steps has reached the goal
+        if(Int(todaySteps.text!)! >= Int(goal1.text!)!){
+            gameStart.isHidden = false
+            
+        }
+        else {
+            gameStart.isHidden = true
+        }
+        print(Int(todaySteps.text!)!)
+        UserDefaults.standard.set(self.goal1.text, forKey: "goal")
+    }
+//    check if goal exists from being saved
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
     }
     
     
