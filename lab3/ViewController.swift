@@ -136,7 +136,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
 //        check if today's steps has reached the goal
         if(Int(todaySteps.text!)! >= Int(goal1.text!)!){
-            gameStart.isHidden = false
+            DispatchQueue.main.async{
+                self.gameStart.isHidden = false
+            }
             
         }
         else {
