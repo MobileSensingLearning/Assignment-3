@@ -145,10 +145,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller Game-->
         <scene sceneID="TKe-dv-GzB">
             <objects>
-                <viewController id="aZk-qO-46h" sceneMemberID="viewController">
+                <viewController id="aZk-qO-46h" customClass="ViewControllerGame" customModule="lab3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5aZ-wY-I4L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
