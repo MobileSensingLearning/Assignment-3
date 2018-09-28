@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		209B990B215C71FC002B73AE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209B990A215C71FC002B73AE /* GameViewController.swift */; };
+		209B990D215C7240002B73AE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209B990C215C7240002B73AE /* GameScene.swift */; };
 		C335D01D215AAA7B007F01B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335D01C215AAA7B007F01B7 /* AppDelegate.swift */; };
 		C335D01F215AAA7B007F01B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335D01E215AAA7B007F01B7 /* ViewController.swift */; };
 		C335D022215AAA7B007F01B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C335D020215AAA7B007F01B7 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		209B990A215C71FC002B73AE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		209B990C215C7240002B73AE /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C335D019215AAA7B007F01B7 /* lab3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lab3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C335D01C215AAA7B007F01B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C335D01E215AAA7B007F01B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				C335D023215AAA7D007F01B7 /* Assets.xcassets */,
 				C335D025215AAA7D007F01B7 /* LaunchScreen.storyboard */,
 				C335D028215AAA7D007F01B7 /* Info.plist */,
+				209B990A215C71FC002B73AE /* GameViewController.swift */,
+				209B990C215C7240002B73AE /* GameScene.swift */,
 			);
 			path = lab3;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C335D01F215AAA7B007F01B7 /* ViewController.swift in Sources */,
+				209B990B215C71FC002B73AE /* GameViewController.swift in Sources */,
+				209B990D215C7240002B73AE /* GameScene.swift in Sources */,
 				C335D01D215AAA7B007F01B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,7 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XF9ZJU79J;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				INFOPLIST_FILE = lab3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2XF9ZJU79J;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				INFOPLIST_FILE = lab3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
