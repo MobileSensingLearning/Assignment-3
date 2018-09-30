@@ -12,28 +12,21 @@ import CoreMotion
 class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var prevSteps: UILabel!
-    @IBOutlet weak var todaySteps: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var tillGoal: UILabel!
     @IBOutlet weak var goal1: UILabel! {
         didSet {
-            goal1.text = "\(filler)"
+            goal1.text = "0"
         }
     }
-    @IBOutlet weak var goal2: UILabel! {
-        didSet {
-            goal2.text = "\(filler)"
-        }
-    }
-    @IBOutlet weak var currentActivity: UILabel!
+    @IBOutlet weak var currentActivity: UIImageView!
     @IBOutlet weak var gameStart: UIButton!
     
     let activityManager = CMMotionActivityManager()
     let customQueue = OperationQueue()
     let pedometer = CMPedometer()
     let startOfDay = NSCalendar.current.startOfDay(for: Date())
-    let filler = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        all textfield methods dont work unless below is included for some reason
@@ -47,38 +40,51 @@ class ViewController: UIViewController, UITextFieldDelegate {
             { (activity:CMMotionActivity?) -> Void in
                 DispatchQueue.main.async {
                     if (activity!.unknown) {
-                        self.currentActivity.text = "Activity: Unknown"
+//                        self.currentActivity.text = "Activity: Unknown"
+                        self.currentActivity.image = UIImage(named: "Image-5")
                     }
                     if (activity!.stationary) {
-                        self.currentActivity.text = "Activity: Stationary"
+//                        self.currentActivity.text = "Activity: Stationary"
+                        self.currentActivity.image = UIImage(named: "Image-6")
                     }
                     if (activity!.walking) {
-                        self.currentActivity.text = "Activity: Walking"
+//                        self.currentActivity.text = "Activity: Walking"
+                        self.currentActivity.image = UIImage(named: "Image")
                     }
                     if (activity!.running) {
-                        self.currentActivity.text = "Activity: Running"
+//                        self.currentActivity.text = "Activity: Running"
+                        self.currentActivity.image = UIImage(named: "Image-2")
                     }
                     if (activity!.automotive) {
-                        self.currentActivity.text = "Activity: In Car"
+//                        self.currentActivity.text = "Activity: In Car"
+                        self.currentActivity.image = UIImage(named: "Image-4")
                     }
                     if (activity!.cycling) {
-                        self.currentActivity.text = "Activity: Cycling"
+//                        self.currentActivity.text = "Activity: Cycling"
+                        self.currentActivity.image = UIImage(named: "Image-1")
+                    }
+                    //        check if today's steps has reached the goal, difference now is that game time button does not show up immediately
+                    if(Int(self.tillGoal.text!)! >= Int(self.goal1.text!)!){
+                        DispatchQueue.main.async{
+                            self.gameStart.isHidden = false
+                        }
+                        
+                    }
+                    else {
+                        self.gameStart.isHidden = true
                     }
                 }
             }
             
         }
-        
 //        load from user_defaults if possible
         if(isKeyPresentInUserDefaults(key: "goal")) {
             let temp = UserDefaults.standard.string(forKey: "goal")
             if(temp! == "") {
                 goal1.text = "0"
-                goal2.text = "0"
             }
             else {
                 goal1.text = UserDefaults.standard.string(forKey: "goal")
-                goal2.text = UserDefaults.standard.string(forKey: "goal")
             }
 
         }
@@ -88,8 +94,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             pedometer.startUpdates(from: startOfDay, withHandler: {(data,error) in
                 if let pedData = data {
                     DispatchQueue.main.async {
-                        self.todaySteps.text = "\(pedData.numberOfSteps)"
                         self.tillGoal.text = "\(pedData.numberOfSteps)"
+
                     }
                 }
 
@@ -115,6 +121,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
+
         
     }
     
@@ -131,22 +138,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //can swap end editing with textfield resign first responder
         if(textField.text != "") {
             goal1.text = textField.text
-            goal2.text = textField.text
         }
-
-//        check if today's steps has reached the goal
-        if(Int(todaySteps.text!)! >= Int(goal1.text!)!){
-            DispatchQueue.main.async{
-                self.gameStart.isHidden = false
-            }
-            
-        }
-        else {
-            gameStart.isHidden = true
-        }
-        print(Int(todaySteps.text!)!)
         UserDefaults.standard.set(self.goal1.text, forKey: "goal")
     }
+    
+
+    
 //    check if goal exists from being saved
     func isKeyPresentInUserDefaults(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
